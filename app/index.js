@@ -120,8 +120,8 @@ class GiuseppePluginGenerator extends Generator {
         this._writeTemplate('_gitignore', '.gitignore');
         this._writeTemplate('_npmignore', '.npmignore');
         this._copyFile('_editorconfig', '.editorconfig');
-        this._copyFile('jest.json');
-        this._writeTemplate('package.json');
+        this._copyFile('_jest.json', 'jest.json');
+        this._writeTemplate('_package.json', 'package.json');
         this._writeTemplate('README.md');
         this._copyFile('tsconfig.json');
         this._copyFile('tslint.json');

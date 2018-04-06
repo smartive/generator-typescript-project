@@ -1,10 +1,12 @@
 {
   "name": "@smartive/generator-typescript-project",
   "version": "0.0.0-development",
-  "description": "Yeoman generator for typescript projects @ smartive.",
+  "description": "Yeoman generator for typescript projects at smartive.",
   "main": "app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "del-cli ./build ./coverage",
+    "test": "npm run clean && jest -c ./jest.json",
+    "test:watch": "npm run clean && jest -c ./jest.json --watch"
   },
   "repository": {
     "type": "git",
@@ -30,5 +32,9 @@
     "lodash": "^4.17.5",
     "yeoman-generator": "^2.0.3",
     "yosay": "^2.0.2"
+  },
+  "devDependencies": {
+    "del-cli": "^1.1.0",
+    "jest": "^22.4.3"
   }
 }
