@@ -1,0 +1,39 @@
+language: node_js
+node_js: '9'
+
+stages:
+  - name: test
+    if: tag IS blank
+  - name: deploy
+    if: branch = master AND type != pull_request
+
+notifications:
+  email: false
+
+jobs:
+  include:
+    - stage: test
+<% if(type === 'application') { %>
+      install: npm ci
+<% } %>
+      after_success:
+        - npm i -g codecov
+        - codecov
+<% if (withTypedoc) { %>
+    - stage: deploy
+<% if(type === 'application') { %>
+      install: npm ci
+<% } %>
+      script: npm run typedoc
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GH_TOKEN
+        local_dir: ./docs
+<% } %>
+    - stage: deploy
+<% if(type === 'application') { %>
+      install: npm ci
+<% } %>
+      before_script: npm run build
+      script: npm run semantic-release

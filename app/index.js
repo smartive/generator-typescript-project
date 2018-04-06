@@ -119,6 +119,7 @@ class GiuseppePluginGenerator extends Generator {
         // Base files.
         this._writeTemplate('_gitignore', '.gitignore');
         this._writeTemplate('_npmignore', '.npmignore');
+        this._copyFile('_editorconfig', '.editorconfig');
         this._copyFile('jest.json');
         this._writeTemplate('package.json');
         this._writeTemplate('README.md');
@@ -129,6 +130,18 @@ class GiuseppePluginGenerator extends Generator {
 
         if (this.options.type === 'library') {
             this._copyFile('_npmrc', '.npmrc');
+        }
+
+        if (this.options.provideGitlab) {
+            this._writeTemplate('_gitlab-ci.yml', '.gitlab-ci.yml');
+        }
+
+        if (this.options.provideAppveyor) {
+            this._writeTemplate('_appveyor.yml', '.appveyor.yml');
+        }
+
+        if (this.options.provideTravis) {
+            this._writeTemplate('_travis.yml', '.travis.yml');
         }
 
         if (this.options.type === 'library') {
@@ -159,18 +172,18 @@ class GiuseppePluginGenerator extends Generator {
             devDeps.push('typedoc');
         }
 
-        this.spawnCommandSync('npm', ['i', '-S', 'tslib']);
-        this.spawnCommandSync('npm', ['i', '-D', ...devDeps]);
+        // this.spawnCommandSync('npm', ['i', '-S', 'tslib']);
+        // this.spawnCommandSync('npm', ['i', '-D', ...devDeps]);
 
-        if (this.options.initializeGitRepo) {
-            this.log('Initializing the git repo.')
-            this.spawnCommandSync('git', ['init']);
-            this.spawnCommandSync('git', ['remote', 'add', 'origin', this.options.gitUrl]);
+        // if (this.options.initializeGitRepo) {
+        //     this.log('Initializing the git repo.')
+        //     this.spawnCommandSync('git', ['init']);
+        //     this.spawnCommandSync('git', ['remote', 'add', 'origin', this.options.gitUrl]);
 
-            this.log('Commiting the base files.');
-            this.spawnCommandSync('git', ['add', '.']);
-            this.spawnCommandSync('git', ['commit', '-am', '"chore: Initial commit."']);
-        }
+        //     this.log('Commiting the base files.');
+        //     this.spawnCommandSync('git', ['add', '.']);
+        //     this.spawnCommandSync('git', ['commit', '-am', '"chore: Initial commit."']);
+        // }
     }
 
     end() {
