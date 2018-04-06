@@ -1,3 +1,5 @@
+const helpers = require('yeoman-test');
+const
 
 describe('typescript project generator', () => {
 

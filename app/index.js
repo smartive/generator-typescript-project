@@ -46,7 +46,7 @@ class GeneratorOptions {
     }
 }
 
-class GiuseppePluginGenerator extends Generator {
+class TypescriptProjectGenerator extends Generator {
     initializing() {
         this.log(yosay(
             `Welcome to the ${green('typescript project')} generator, I'll compose a new project for you.`,
@@ -239,4 +239,4 @@ class GiuseppePluginGenerator extends Generator {
     }
 }
 
-module.exports = GiuseppePluginGenerator;
+module.exports = TypescriptProjectGenerator;
