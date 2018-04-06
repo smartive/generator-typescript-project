@@ -1,10 +1,26 @@
-const helpers = require('yeoman-test');
-const
+// const { join } = require('path');
+// const helpers = require('yeoman-test');
+// const TypescriptProjectGenerator = require('../app');
 
-describe('typescript project generator', () => {
+// const defaultPrompts = {
+//     name: 'name',
+//     description: 'description',
+//     type: 'library',
+//     ciconfigs: [],
+//     withTypedoc: false,
+//     initializeGitRepo: false,
+// }
 
-    it('sdf', () => {
-        expect(true).toBe(true);
-    });
+// const setup = helpers.setUpTestDirectory(join(__dirname, './temp'));
 
-});
+// describe('typescript project generator', () => {
+
+//     beforeEach(() => {
+//     });
+
+//     it('sdf', async () => {
+//         const a = await helpers.run(TypescriptProjectGenerator);
+//         console.log(a);
+//     });
+
+// });
