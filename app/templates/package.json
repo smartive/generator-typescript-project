@@ -16,12 +16,19 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "GIT URL"
+    "url": "<%= gitUrl %>.git"
   },
+  "bugs": {
+    "url": "<%= gitUrl %>/issues"
+  },
+  "homepage": "<%= gitUrl %>#readme",
   "engines": {
     "node": ">=9",
     "npm": "*"
   },
   "author": "<%= gitUser %> <<%= gitEmail %>>",
-  "license": "ISC"
+  "license": "ISC"<% if(scopedPackage) {%>,
+  "publishConfig": {
+    "access": "public"
+  }<% } %>
 }

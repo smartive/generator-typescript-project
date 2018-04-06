@@ -79,7 +79,6 @@ class GiuseppePluginGenerator extends Generator {
         // Base files.
         this._writeTemplate('_gitignore', '.gitignore');
         this._writeTemplate('_npmignore', '.npmignore');
-        this._copyFile('CHANGELOG.md');
         this._copyFile('jest.json');
         this._writeTemplate('package.json');
         this._writeTemplate('README.md');
@@ -105,10 +104,11 @@ class GiuseppePluginGenerator extends Generator {
         this.log('Installing dependencies.');
 
         const devDeps = [
-            '@types/jest',
             '@smartive/tslint-config',
+            '@types/jest',
             'del-cli',
             'jest',
+            'semantic-release',
             'ts-jest',
             'tslint',
             'tsutils',
@@ -128,7 +128,7 @@ class GiuseppePluginGenerator extends Generator {
 
             this.log('Commiting the base files.');
             this.spawnCommandSync('git', ['add', '.']);
-            this.spawnCommandSync('git', ['commit', '-am', '"Initial commit."']);
+            this.spawnCommandSync('git', ['commit', '-am', '"chore: Initial commit."']);
         }
     }
 
