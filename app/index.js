@@ -77,7 +77,6 @@ class GiuseppePluginGenerator extends Generator {
         this.log(`Writing template files.`);
 
         // Base files.
-        this._writeTemplate('_gitattributes', '.gitattributes');
         this._writeTemplate('_gitignore', '.gitignore');
         this._writeTemplate('_npmignore', '.npmignore');
         this._copyFile('CHANGELOG.md');
@@ -107,11 +106,11 @@ class GiuseppePluginGenerator extends Generator {
 
         const devDeps = [
             '@types/jest',
+            '@smartive/tslint-config',
             'del-cli',
             'jest',
             'ts-jest',
             'tslint',
-            'tslint-config-airbnb',
             'tsutils',
             'typescript',
         ];

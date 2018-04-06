@@ -9,9 +9,7 @@
         "declaration": <% if(type === 'library') { %>true<% } else { %>false<% } %>,
         "sourceMap": false,
         "importHelpers": true,
-        "strictNullChecks": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
+        "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "lib": [
@@ -22,8 +20,5 @@
     "include": [
         "../src/**/*"
     ],
-    "exclude": [
-        "../node_modules",
-        "../build"
-    ]
+    "exclude": []
 }

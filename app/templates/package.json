@@ -1,6 +1,6 @@
 {
   "name": "<%= name %>",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "<%= description %>",
   "main": "<% if(type === 'library') { %>index<% } else { %>app<% } %>.js",<% if(type === 'library') { %>
   "typings": "index.d.ts",<% } %>
@@ -19,7 +19,7 @@
     "url": "GIT URL"
   },
   "engines": {
-    "node": ">=7",
+    "node": ">=9",
     "npm": "*"
   },
   "author": "<%= gitUser %> <<%= gitEmail %>>",
