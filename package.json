@@ -1,0 +1,27 @@
+{
+  "name": "generator-typescript-project",
+  "version": "0.0.1",
+  "description": "Yeoman generator for giuseppe plugins",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://git.smartive.ch/christoph/generator-typescript"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "yeoman",
+    "typescript",
+    "bootstrap"
+  ],
+  "author": "Christoph Bühler <christoph.buehler@bluewin.ch>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "lodash": "^4.17.4",
+    "yeoman-generator": "^1.1.1",
+    "yosay": "^2.0.0"
+  }
+}
