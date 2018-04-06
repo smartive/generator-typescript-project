@@ -9,21 +9,17 @@ stages:
 
 notifications:
   email: false
-
+<% if(type === 'application') { %>
+install: npm ci
+<% } %>
 jobs:
   include:
     - stage: test
-<% if(type === 'application') { %>
-      install: npm ci
-<% } %>
       after_success:
         - npm i -g codecov
         - codecov
 <% if (withTypedoc) { %>
     - stage: deploy
-<% if(type === 'application') { %>
-      install: npm ci
-<% } %>
       script: npm run typedoc
       deploy:
         provider: pages
@@ -32,8 +28,5 @@ jobs:
         local_dir: ./docs
 <% } %>
     - stage: deploy
-<% if(type === 'application') { %>
-      install: npm ci
-<% } %>
       before_script: npm run build
       script: npm run semantic-release
