@@ -172,18 +172,18 @@ class GiuseppePluginGenerator extends Generator {
             devDeps.push('typedoc');
         }
 
-        // this.spawnCommandSync('npm', ['i', '-S', 'tslib']);
-        // this.spawnCommandSync('npm', ['i', '-D', ...devDeps]);
+        this.spawnCommandSync('npm', ['i', '-S', 'tslib']);
+        this.spawnCommandSync('npm', ['i', '-D', ...devDeps]);
 
-        // if (this.options.initializeGitRepo) {
-        //     this.log('Initializing the git repo.')
-        //     this.spawnCommandSync('git', ['init']);
-        //     this.spawnCommandSync('git', ['remote', 'add', 'origin', this.options.gitUrl]);
+        if (this.options.initializeGitRepo) {
+            this.log('Initializing the git repo.')
+            this.spawnCommandSync('git', ['init']);
+            this.spawnCommandSync('git', ['remote', 'add', 'origin', this.options.gitUrl]);
 
-        //     this.log('Commiting the base files.');
-        //     this.spawnCommandSync('git', ['add', '.']);
-        //     this.spawnCommandSync('git', ['commit', '-am', '"chore: Initial commit."']);
-        // }
+            this.log('Commiting the base files.');
+            this.spawnCommandSync('git', ['add', '.']);
+            this.spawnCommandSync('git', ['commit', '-am', '"chore: Initial commit."']);
+        }
     }
 
     end() {
