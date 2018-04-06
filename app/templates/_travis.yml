@@ -15,6 +15,13 @@ install: npm ci
 jobs:
   include:
     - stage: test
+<% if (type === 'application') { %>
+      before_script:
+        - npm i -g greenkeeper-lockfile@1
+        - greenkeeper-lockfile-update
+      after_script:
+        - greenkeeper-lockfile-upload
+<% } %>
       after_success:
         - npm i -g codecov
         - codecov
