@@ -21,7 +21,7 @@ class GeneratorOptions {
 class GiuseppePluginGenerator extends Generator {
     initializing() {
         this.log(yosay(
-            `Welcome to the ${green('giuseppe-plugin')} generator, I'll compose a new giuseppe plugin for you.`,
+            `Welcome to the ${green('typescript project')} generator, I'll compose a new project for you.`,
         ));
     }
 
