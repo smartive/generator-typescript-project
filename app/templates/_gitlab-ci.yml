@@ -1,0 +1,23 @@
+image: node:9
+
+stages:
+  - test
+  - release
+
+test <%= type %>:
+  stage: test
+  before_script:
+    - npm <% if (type === 'application') { %>ci<% } else { %>install<% } %>
+  coverage: /All files\s*\|\s*([\d\.]+)/
+  except:
+    - tags
+
+release <%= type %>:
+  stage: release
+  before_script:
+    - npm <% if (type === 'application') { %>ci<% } else { %>install<% } %>
+    - npm run build
+  script:
+    - npm run semantic-release
+  only:
+    - master

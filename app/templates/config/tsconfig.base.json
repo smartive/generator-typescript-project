@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "removeComments": <% if(type === 'library') { %>false<% } else { %>true<% } %>,
+        "outDir": "../build",
+        "rootDir": "../src",
+        "declaration": <% if(type === 'library') { %>true<% } else { %>false<% } %>,
+        "sourceMap": false,
+        "importHelpers": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "lib": [
+            "es2015"<% if(withTypedoc) {%>,
+            "dom"<% } %>
+        ]
+    },
+    "include": [
+        "../src/**/*"
+    ],
+    "exclude": []
+}
