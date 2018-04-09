@@ -51,6 +51,11 @@ class TypescriptProjectGenerator extends Generator {
         this.log(yosay(
             `Welcome to the ${green('typescript project')} generator, I'll compose a new project for you.`,
         ));
+
+        if (process.env['NODE_ENV'] === 'test') {
+            this.spawnCommandSync = jest.fn();
+            TypescriptProjectGenerator.staticSpawnMock = this.spawnCommandSync;
+        }
     }
 
     async prompting() {
@@ -99,14 +104,15 @@ class TypescriptProjectGenerator extends Generator {
             },
         ]);
 
-        answers.gitUser = this.user.git.name();
-        answers.gitEmail = this.user.git.email();
+        answers.gitUser = process.env['NODE_ENV'] === 'test' ? 'gitUser' : this.user.git.name();
+        answers.gitEmail = process.env['NODE_ENV'] === 'test' ? 'gitEmail' : this.user.git.email();
         this.options = new GeneratorOptions(answers);
         return answers;
     }
 
     configuring() {
         this.log(`Configuring your module ${green(this.options.name)}.`);
+        this.sourceRoot(join(__dirname, 'templates'));
 
         if (this.options.createPackageFolder) {
             this.destinationRoot(join(this.destinationRoot(), this.options.folderName));
