@@ -24,7 +24,7 @@
   },
   "homepage": "<%= gitUrl %>#readme",
   "engines": {
-    "node": ">=9",
+    "node": "^9.0.0",
     "npm": "*"
   },
   "author": "<%= gitUser %> <<%= gitEmail %>>",

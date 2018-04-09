@@ -118,7 +118,7 @@ exports[`typescript project generator template files should a default package js
   },
   \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
   \\"engines\\": {
-    \\"node\\": \\">=9\\",
+    \\"node\\": \\"^9.0.0\\",
     \\"npm\\": \\"*\\"
   },
   \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
@@ -241,6 +241,44 @@ description
 "
 `;
 
+exports[`typescript project generator template files should add access config to package json if package is scoped 1`] = `
+"{
+  \\"name\\": \\"@smartive/scoped-name\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"index.js\\",
+  \\"typings\\": \\"index.d.ts\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli ./build ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\",
+    \\"semantic-release\\": \\"semantic-release\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/USER/REPO.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/USER/REPO/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\"^9.0.0\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"license\\": \\"ISC\\",
+  \\"publishConfig\\": {
+    \\"access\\": \\"public\\"
+  }
+}
+"
+`;
+
 exports[`typescript project generator template files should add an editorconfig 1`] = `
 "root = true
 
@@ -255,6 +293,86 @@ max_line_length = 125
 
 [*.md]
 trim_trailing_whitespace = false
+"
+`;
+
+exports[`typescript project generator template files should add appveyor ci if selected 1`] = `
+"version: \\"{build} - {branch}\\"
+skip_tags: true
+skip_branch_with_pr: true
+
+matrix:
+  fast_finish: true
+
+environment:
+  matrix:
+    - nodejs_version: \\"9\\"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install
+
+test_script:
+  - npm test
+  - npm install -g codecov
+  - codecov
+
+build: off
+"
+`;
+
+exports[`typescript project generator template files should add default ts base config 1`] = `
+"{
+    \\"compilerOptions\\": {
+        \\"target\\": \\"es6\\",
+        \\"module\\": \\"commonjs\\",
+        \\"moduleResolution\\": \\"node\\",
+        \\"removeComments\\": false,
+        \\"outDir\\": \\"../build\\",
+        \\"rootDir\\": \\"../src\\",
+        \\"declaration\\": true,
+        \\"sourceMap\\": false,
+        \\"importHelpers\\": true,
+        \\"strict\\": true,
+        \\"noUnusedLocals\\": true,
+        \\"noUnusedParameters\\": true,
+        \\"lib\\": [
+            \\"es2015\\"
+        ]
+    },
+    \\"include\\": [
+        \\"../src/**/*\\"
+    ],
+    \\"exclude\\": []
+}
+"
+`;
+
+exports[`typescript project generator template files should add default ts build config 1`] = `
+"{
+    \\"extends\\": \\"./tsconfig.base.json\\",
+    \\"compilerOptions\\": {
+        \\"outDir\\": \\"../\\"
+    }
+}
+"
+`;
+
+exports[`typescript project generator template files should add default tsconfig 1`] = `
+"{
+    \\"extends\\": \\"./config/tsconfig.base.json\\",
+    \\"compilerOptions\\": {
+        \\"watch\\": true,
+        \\"sourceMap\\": true
+    }
+}
+"
+`;
+
+exports[`typescript project generator template files should add default tslint config 1`] = `
+"{
+    \\"extends\\": \\"@smartive/tslint-config\\"
+}
 "
 `;
 
@@ -308,5 +426,228 @@ test/
 # Documentation
 docs/
 
+"
+`;
+
+exports[`typescript project generator template files should add dom lib in build config with typedoc 1`] = `
+"{
+    \\"compilerOptions\\": {
+        \\"target\\": \\"es6\\",
+        \\"module\\": \\"commonjs\\",
+        \\"moduleResolution\\": \\"node\\",
+        \\"removeComments\\": false,
+        \\"outDir\\": \\"../build\\",
+        \\"rootDir\\": \\"../src\\",
+        \\"declaration\\": true,
+        \\"sourceMap\\": false,
+        \\"importHelpers\\": true,
+        \\"strict\\": true,
+        \\"noUnusedLocals\\": true,
+        \\"noUnusedParameters\\": true,
+        \\"lib\\": [
+            \\"es2015\\",
+            \\"dom\\"
+        ]
+    },
+    \\"include\\": [
+        \\"../src/**/*\\"
+    ],
+    \\"exclude\\": []
+}
+"
+`;
+
+exports[`typescript project generator template files should add gitlab ci if selected 1`] = `
+"image: node:9
+
+stages:
+  - test
+  - release
+
+test library:
+  stage: test
+  before_script:
+    - npm install
+  coverage: /All files\\\\s*\\\\|\\\\s*([\\\\d\\\\.]+)/
+  except:
+    - tags
+
+release library:
+  stage: release
+  before_script:
+    - npm install
+    - npm run build
+  script:
+    - npm run semantic-release
+  only:
+    - master
+"
+`;
+
+exports[`typescript project generator template files should add giturl to package json 1`] = `
+"{
+  \\"name\\": \\"name\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"index.js\\",
+  \\"typings\\": \\"index.d.ts\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli ./build ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\",
+    \\"semantic-release\\": \\"semantic-release\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/smartive/generator-typescript-project.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/smartive/generator-typescript-project/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/smartive/generator-typescript-project#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\"^9.0.0\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"license\\": \\"ISC\\"
+}
+"
+`;
+
+exports[`typescript project generator template files should add travis ci if selected 1`] = `
+"language: node_js
+node_js: '9'
+
+stages:
+  - name: test
+    if: tag IS blank
+  - name: deploy
+    if: branch = master AND type != pull_request
+
+notifications:
+  email: false
+
+jobs:
+  include:
+    - stage: test
+
+      after_success:
+        - npm i -g codecov
+        - codecov
+
+    - stage: deploy
+      before_script: npm run build
+      script: npm run semantic-release
+"
+`;
+
+exports[`typescript project generator template files should add typedoc to package json 1`] = `
+"{
+  \\"name\\": \\"name\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"app.js\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli ./build ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\",
+    \\"semantic-release\\": \\"semantic-release\\",
+    \\"typedoc\\": \\"del-cli ./docs && typedoc --ignoreCompilerErrors --out ./docs --mode file --tsconfig ./config/tsconfig.build.json ./src/\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/USER/REPO.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/USER/REPO/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\"^9.0.0\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"license\\": \\"ISC\\"
+}
+"
+`;
+
+exports[`typescript project generator template files should change main in package json file for application type 1`] = `
+"{
+  \\"name\\": \\"name\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"app.js\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli ./build ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\",
+    \\"semantic-release\\": \\"semantic-release\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/USER/REPO.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/USER/REPO/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\"^9.0.0\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"license\\": \\"ISC\\"
+}
+"
+`;
+
+exports[`typescript project generator template files should change out dir in ts build config for application 1`] = `
+"{
+    \\"extends\\": \\"./tsconfig.base.json\\",
+    \\"compilerOptions\\": {
+        \\"outDir\\": \\"../build\\"
+    }
+}
+"
+`;
+
+exports[`typescript project generator template files should remove comments and declarations in build config for application 1`] = `
+"{
+    \\"compilerOptions\\": {
+        \\"target\\": \\"es6\\",
+        \\"module\\": \\"commonjs\\",
+        \\"moduleResolution\\": \\"node\\",
+        \\"removeComments\\": true,
+        \\"outDir\\": \\"../build\\",
+        \\"rootDir\\": \\"../src\\",
+        \\"declaration\\": false,
+        \\"sourceMap\\": false,
+        \\"importHelpers\\": true,
+        \\"strict\\": true,
+        \\"noUnusedLocals\\": true,
+        \\"noUnusedParameters\\": true,
+        \\"lib\\": [
+            \\"es2015\\"
+        ]
+    },
+    \\"include\\": [
+        \\"../src/**/*\\"
+    ],
+    \\"exclude\\": []
+}
 "
 `;
