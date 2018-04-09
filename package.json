@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "del-cli ./build ./coverage",
     "test": "npm run clean && jest -c ./jest.json",
-    "test:watch": "npm run clean && jest -c ./jest.json --watch"
+    "test:watch": "npm run clean && jest -c ./jest.json --watch",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -14,8 +15,12 @@
   },
   "engines": {
     "node": "^9.0.0",
-    "npm": "^5.8.0"
+    "npm": "*"
   },
+  "bugs": {
+    "url": "https://github.com/smartive/generator-typescript-project/issues"
+  },
+  "homepage": "https://github.com/smartive/generator-typescript-project#readme",
   "publishConfig": {
     "access": "public"
   },
@@ -36,6 +41,7 @@
   "devDependencies": {
     "del-cli": "^1.1.0",
     "jest": "^22.4.3",
+    "semantic-release": "^15.1.5",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.7.0"
   }
