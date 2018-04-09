@@ -310,6 +310,31 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
+  - npm ci
+
+test_script:
+  - npm test
+  - npm install -g codecov
+  - codecov
+
+build: off
+"
+`;
+
+exports[`typescript project generator template files should add appveyor ci if selected 2`] = `
+"version: \\"{build} - {branch}\\"
+skip_tags: true
+skip_branch_with_pr: true
+
+matrix:
+  fast_finish: true
+
+environment:
+  matrix:
+    - nodejs_version: \\"9\\"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
   - npm install
 
 test_script:
@@ -484,6 +509,33 @@ release library:
 "
 `;
 
+exports[`typescript project generator template files should add gitlab ci if selected 2`] = `
+"image: node:9
+
+stages:
+  - test
+  - release
+
+test application:
+  stage: test
+  before_script:
+    - npm ci
+  coverage: /All files\\\\s*\\\\|\\\\s*([\\\\d\\\\.]+)/
+  except:
+    - tags
+
+release application:
+  stage: release
+  before_script:
+    - npm ci
+    - npm run build
+  script:
+    - npm run semantic-release
+  only:
+    - master
+"
+`;
+
 exports[`typescript project generator template files should add giturl to package json 1`] = `
 "{
   \\"name\\": \\"name\\",
@@ -539,6 +591,76 @@ jobs:
       after_success:
         - npm i -g codecov
         - codecov
+
+    - stage: deploy
+      before_script: npm run build
+      script: npm run semantic-release
+"
+`;
+
+exports[`typescript project generator template files should add travis ci if selected 2`] = `
+"language: node_js
+node_js: '9'
+
+stages:
+  - name: test
+    if: tag IS blank
+  - name: deploy
+    if: branch = master AND type != pull_request
+
+notifications:
+  email: false
+
+install: npm ci
+
+jobs:
+  include:
+    - stage: test
+
+      before_script:
+        - npm i -g greenkeeper-lockfile@1
+        - greenkeeper-lockfile-update
+      after_script:
+        - greenkeeper-lockfile-upload
+
+      after_success:
+        - npm i -g codecov
+        - codecov
+
+    - stage: deploy
+      before_script: npm run build
+      script: npm run semantic-release
+"
+`;
+
+exports[`typescript project generator template files should add travis ci if selected 3`] = `
+"language: node_js
+node_js: '9'
+
+stages:
+  - name: test
+    if: tag IS blank
+  - name: deploy
+    if: branch = master AND type != pull_request
+
+notifications:
+  email: false
+
+jobs:
+  include:
+    - stage: test
+
+      after_success:
+        - npm i -g codecov
+        - codecov
+
+    - stage: deploy
+      script: npm run typedoc
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GH_TOKEN
+        local_dir: ./docs
 
     - stage: deploy
       before_script: npm run build

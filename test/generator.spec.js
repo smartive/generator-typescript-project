@@ -239,7 +239,7 @@ describe('typescript project generator', () => {
                     ...defaultPrompts,
                     type: 'application',
                 });
-                expect(existsSync(join(folder, 'name', '.npmrc'))).toBe(false);
+            expect(existsSync(join(folder, 'name', '.npmrc'))).toBe(false);
         });
 
         it('should add gitlab ci if selected', async () => {
@@ -250,6 +250,30 @@ describe('typescript project generator', () => {
                     ciconfigs: ['GitLab'],
                 });
             const content = readFileSync(join(folder, 'name', '.gitlab-ci.yml'), 'utf8');
+            expect(content).toMatchSnapshot();
+        });
+
+        it('should add gitlab ci if selected', async () => {
+            const folder = await helpers
+                .run(TypescriptProjectGenerator)
+                .withPrompts({
+                    ...defaultPrompts,
+                    type: 'application',
+                    ciconfigs: ['GitLab'],
+                });
+            const content = readFileSync(join(folder, 'name', '.gitlab-ci.yml'), 'utf8');
+            expect(content).toMatchSnapshot();
+        });
+
+        it('should add appveyor ci if selected', async () => {
+            const folder = await helpers
+                .run(TypescriptProjectGenerator)
+                .withPrompts({
+                    ...defaultPrompts,
+                    type: 'application',
+                    ciconfigs: ['Appveyor'],
+                });
+            const content = readFileSync(join(folder, 'name', '.appveyor.yml'), 'utf8');
             expect(content).toMatchSnapshot();
         });
 
@@ -269,6 +293,30 @@ describe('typescript project generator', () => {
                 .run(TypescriptProjectGenerator)
                 .withPrompts({
                     ...defaultPrompts,
+                    ciconfigs: ['Travis'],
+                });
+            const content = readFileSync(join(folder, 'name', '.travis.yml'), 'utf8');
+            expect(content).toMatchSnapshot();
+        });
+
+        it('should add travis ci if selected', async () => {
+            const folder = await helpers
+                .run(TypescriptProjectGenerator)
+                .withPrompts({
+                    ...defaultPrompts,
+                    type: 'application',
+                    ciconfigs: ['Travis'],
+                });
+            const content = readFileSync(join(folder, 'name', '.travis.yml'), 'utf8');
+            expect(content).toMatchSnapshot();
+        });
+
+        it('should add travis ci if selected', async () => {
+            const folder = await helpers
+                .run(TypescriptProjectGenerator)
+                .withPrompts({
+                    ...defaultPrompts,
+                    withTypedoc: true,
                     ciconfigs: ['Travis'],
                 });
             const content = readFileSync(join(folder, 'name', '.travis.yml'), 'utf8');
