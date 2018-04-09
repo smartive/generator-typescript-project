@@ -11,17 +11,16 @@ const defaultPrompts = {
     initializeGitRepo: false,
 }
 
-// const setup = helpers.setUpTestDirectory(join(__dirname, './temp'));
-
 describe('typescript project generator', () => {
 
     beforeEach(() => {
     });
 
     it('should be tested', async () => {
-        expect(true).toBe(true);
-        // const a = await helpers.run(TypescriptProjectGenerator);
-        // console.log(a);
+        const folder = await helpers
+            .run(TypescriptProjectGenerator)
+            .withPrompts(defaultPrompts);
+        console.log(folder);
     });
 
 });

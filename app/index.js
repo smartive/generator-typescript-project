@@ -51,6 +51,10 @@ class TypescriptProjectGenerator extends Generator {
         this.log(yosay(
             `Welcome to the ${green('typescript project')} generator, I'll compose a new project for you.`,
         ));
+
+        if (process.env['NODE_ENV'] === 'test') {
+            this.spawnCommandSync = jest.fn();
+        }
     }
 
     async prompting() {
@@ -107,6 +111,7 @@ class TypescriptProjectGenerator extends Generator {
 
     configuring() {
         this.log(`Configuring your module ${green(this.options.name)}.`);
+        this.sourceRoot(join(__dirname, 'templates'));
 
         if (this.options.createPackageFolder) {
             this.destinationRoot(join(this.destinationRoot(), this.options.folderName));
