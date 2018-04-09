@@ -1,0 +1,16 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build
+coverage
+
+<% if(withTypedoc) { %>
+# Documentation
+docs/
+<% } %>

@@ -1,0 +1,42 @@
+{
+  "name": "@smartive/generator-typescript-project",
+  "version": "0.0.0-development",
+  "description": "Yeoman generator for typescript projects at smartive.",
+  "main": "app/index.js",
+  "scripts": {
+    "clean": "del-cli ./build ./coverage",
+    "test": "npm run clean && jest -c ./jest.json",
+    "test:watch": "npm run clean && jest -c ./jest.json --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smartive/generator-typescript-project.git"
+  },
+  "engines": {
+    "node": "^9.0.0",
+    "npm": "^5.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "yeoman",
+    "typescript",
+    "bootstrap"
+  ],
+  "author": "Christoph Bühler <christoph@smartive.ch> (https://smartive.ch)",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "lodash": "^4.17.5",
+    "yeoman-generator": "^2.0.3",
+    "yosay": "^2.0.2"
+  },
+  "devDependencies": {
+    "del-cli": "^1.1.0",
+    "jest": "^22.4.3",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^1.7.0"
+  }
+}

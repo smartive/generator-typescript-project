@@ -1,0 +1,39 @@
+language: node_js
+node_js: '9'
+
+stages:
+  - name: test
+    if: tag IS blank
+  - name: deploy
+    if: branch = master AND type != pull_request
+
+notifications:
+  email: false
+<% if(type === 'application') { %>
+install: npm ci
+<% } %>
+jobs:
+  include:
+    - stage: test
+<% if (type === 'application') { %>
+      before_script:
+        - npm i -g greenkeeper-lockfile@1
+        - greenkeeper-lockfile-update
+      after_script:
+        - greenkeeper-lockfile-upload
+<% } %>
+      after_success:
+        - npm i -g codecov
+        - codecov
+<% if (withTypedoc) { %>
+    - stage: deploy
+      script: npm run typedoc
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GH_TOKEN
+        local_dir: ./docs
+<% } %>
+    - stage: deploy
+      before_script: npm run build
+      script: npm run semantic-release
