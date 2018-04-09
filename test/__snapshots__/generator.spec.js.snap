@@ -121,7 +121,7 @@ exports[`typescript project generator template files should a default package js
     \\"node\\": \\"^9.0.0\\",
     \\"npm\\": \\"*\\"
   },
-  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"author\\": \\"gitUser <gitEmail>\\",
   \\"license\\": \\"ISC\\"
 }
 "
@@ -270,7 +270,7 @@ exports[`typescript project generator template files should add access config to
     \\"node\\": \\"^9.0.0\\",
     \\"npm\\": \\"*\\"
   },
-  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"author\\": \\"gitUser <gitEmail>\\",
   \\"license\\": \\"ISC\\",
   \\"publishConfig\\": {
     \\"access\\": \\"public\\"
@@ -565,7 +565,7 @@ exports[`typescript project generator template files should add giturl to packag
     \\"node\\": \\"^9.0.0\\",
     \\"npm\\": \\"*\\"
   },
-  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"author\\": \\"gitUser <gitEmail>\\",
   \\"license\\": \\"ISC\\"
 }
 "
@@ -697,7 +697,7 @@ exports[`typescript project generator template files should add typedoc to packa
     \\"node\\": \\"^9.0.0\\",
     \\"npm\\": \\"*\\"
   },
-  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"author\\": \\"gitUser <gitEmail>\\",
   \\"license\\": \\"ISC\\"
 }
 "
@@ -731,7 +731,7 @@ exports[`typescript project generator template files should change main in packa
     \\"node\\": \\"^9.0.0\\",
     \\"npm\\": \\"*\\"
   },
-  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"author\\": \\"gitUser <gitEmail>\\",
   \\"license\\": \\"ISC\\"
 }
 "

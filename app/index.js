@@ -104,8 +104,8 @@ class TypescriptProjectGenerator extends Generator {
             },
         ]);
 
-        answers.gitUser = this.user.git.name();
-        answers.gitEmail = this.user.git.email();
+        answers.gitUser = process.env['NODE_ENV'] === 'test' ? 'gitUser' : this.user.git.name();
+        answers.gitEmail = process.env['NODE_ENV'] === 'test' ? 'gitEmail' : this.user.git.email();
         this.options = new GeneratorOptions(answers);
         return answers;
     }
