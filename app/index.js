@@ -54,6 +54,7 @@ class TypescriptProjectGenerator extends Generator {
 
         if (process.env['NODE_ENV'] === 'test') {
             this.spawnCommandSync = jest.fn();
+            TypescriptProjectGenerator.staticSpawnMock = this.spawnCommandSync;
         }
     }
 

@@ -1,0 +1,312 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typescript project generator git should add base files 1`] = `
+Array [
+  "git",
+  Array [
+    "add",
+    ".",
+  ],
+]
+`;
+
+exports[`typescript project generator git should add git remote origin 1`] = `
+Array [
+  "git",
+  Array [
+    "remote",
+    "add",
+    "origin",
+    "https://github.com/smartive/generator-typescript-project",
+  ],
+]
+`;
+
+exports[`typescript project generator git should commit the base files 1`] = `
+Array [
+  "git",
+  Array [
+    "commit",
+    "-am",
+    "\\"chore: Initial commit.\\"",
+  ],
+]
+`;
+
+exports[`typescript project generator git should initialize a git repo 1`] = `
+Array [
+  "git",
+  Array [
+    "init",
+  ],
+]
+`;
+
+exports[`typescript project generator install should add typedoc dev dependency 1`] = `
+Array [
+  "npm",
+  Array [
+    "i",
+    "-D",
+    "@smartive/tslint-config",
+    "@types/jest",
+    "del-cli",
+    "jest",
+    "semantic-release",
+    "ts-jest",
+    "tslint",
+    "tsutils",
+    "typescript",
+    "typedoc",
+  ],
+]
+`;
+
+exports[`typescript project generator install should install dev dependencies 1`] = `
+Array [
+  "npm",
+  Array [
+    "i",
+    "-D",
+    "@smartive/tslint-config",
+    "@types/jest",
+    "del-cli",
+    "jest",
+    "semantic-release",
+    "ts-jest",
+    "tslint",
+    "tsutils",
+    "typescript",
+  ],
+]
+`;
+
+exports[`typescript project generator install should install tslib 1`] = `
+Array [
+  "npm",
+  Array [
+    "i",
+    "-S",
+    "tslib",
+  ],
+]
+`;
+
+exports[`typescript project generator template files should a default package json 1`] = `
+"{
+  \\"name\\": \\"name\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"index.js\\",
+  \\"typings\\": \\"index.d.ts\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli ./build ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\",
+    \\"semantic-release\\": \\"semantic-release\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/USER/REPO.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/USER/REPO/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\">=9\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"Christoph Bühler <christoph@smartive.ch>\\",
+  \\"license\\": \\"ISC\\"
+}
+"
+`;
+
+exports[`typescript project generator template files should add CI configs to npm ignore 1`] = `
+"# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build/
+coverage/
+config/
+tsconfig.json
+tslint.json
+
+# Typescript files (but not the definitions)
+*.ts
+!*.d.ts
+
+# Testfiles
+jest.json
+test/
+
+
+# CI Configs
+.gitlab-ci.yml
+.travis.yml
+.appveyor.yml
+
+
+
+"
+`;
+
+exports[`typescript project generator template files should add a default git ignore 1`] = `
+"# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build
+coverage
+
+
+"
+`;
+
+exports[`typescript project generator template files should add a jest config 1`] = `
+"{
+    \\"collectCoverage\\": true,
+    \\"mapCoverage\\": true,
+    \\"transform\\": {
+        \\"^.+\\\\\\\\.tsx?$\\": \\"<rootDir>/node_modules/ts-jest/preprocessor.js\\"
+    },
+    \\"testMatch\\": [
+        \\"**/test/**/*.spec.ts\\"
+    ],
+    \\"testPathIgnorePatterns\\": [
+        \\"/node_modules/\\"
+    ],
+    \\"moduleFileExtensions\\": [
+        \\"ts\\",
+        \\"tsx\\",
+        \\"js\\",
+        \\"json\\"
+    ]
+}
+"
+`;
+
+exports[`typescript project generator template files should add a npm ignore 1`] = `
+"# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build/
+coverage/
+config/
+tsconfig.json
+tslint.json
+
+# Typescript files (but not the definitions)
+*.ts
+!*.d.ts
+
+# Testfiles
+jest.json
+test/
+
+
+
+
+"
+`;
+
+exports[`typescript project generator template files should add a readme 1`] = `
+"# name
+
+This is a typescript project.
+
+description
+"
+`;
+
+exports[`typescript project generator template files should add an editorconfig 1`] = `
+"root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 125
+
+[*.md]
+trim_trailing_whitespace = false
+"
+`;
+
+exports[`typescript project generator template files should add doc to git ignore 1`] = `
+"# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build
+coverage
+
+
+# Documentation
+docs/
+
+"
+`;
+
+exports[`typescript project generator template files should add doc to npm ignore 1`] = `
+"# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build/
+coverage/
+config/
+tsconfig.json
+tslint.json
+
+# Typescript files (but not the definitions)
+*.ts
+!*.d.ts
+
+# Testfiles
+jest.json
+test/
+
+
+
+
+# Documentation
+docs/
+
+"
+`;
