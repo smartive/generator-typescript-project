@@ -8,6 +8,8 @@ test <%= type %>:
   stage: test
   before_script:
     - npm <% if (type === 'application') { %>ci<% } else { %>install<% } %>
+  script:
+    - npm test
   coverage: /All files\s*\|\s*([\d\.]+)/
   except:
     - tags
