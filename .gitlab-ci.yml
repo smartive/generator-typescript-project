@@ -13,6 +13,8 @@ test generator:
   coverage: /All files\s*\|\s*([\d\.]+)/
   except:
     - tags
+  tags:
+    - smartive
 
 release generator:
   stage: release
@@ -23,3 +25,5 @@ release generator:
     - npx semantic-release
   only:
     - master
+  tags:
+    - smartive
