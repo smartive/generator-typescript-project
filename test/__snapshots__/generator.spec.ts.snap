@@ -1,0 +1,538 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Typescript Project Generator Package Installation should install the correct list of dependencies 1`] = `
+Array [
+  "tslib",
+]
+`;
+
+exports[`Typescript Project Generator Package Installation should install the correct list of dev dependencies 1`] = `
+Array [
+  "@smartive/tslint-config",
+  "@types/jest",
+  "del-cli",
+  "jest",
+  "semantic-release",
+  "ts-jest",
+  "tslint",
+  "tsutils",
+  "typescript",
+]
+`;
+
+exports[`Typescript Project Generator Template Files should add access config to package json if package is scoped 1`] = `
+"{
+  \\"name\\": \\"@test/mc-testington\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"index.js\\",
+  \\"typings\\": \\"index.d.ts\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli **/*.js **/*.d.ts !src/**/* !test/**/* !config/**/* !node_modules/**/* ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json --coverage\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/USER/REPO.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/USER/REPO/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\">=10\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"gitUser <gitEmail>\\",
+  \\"license\\": \\"UNLICENCE\\",
+  \\"publishConfig\\": {
+    \\"access\\": \\"public\\"
+  }
+}
+"
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 1`] = `
+Object {
+  "content": "root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 125
+
+[*.md]
+trim_trailing_whitespace = false
+",
+  "name": ".editorconfig",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 2`] = `
+Object {
+  "content": "# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build
+coverage
+",
+  "name": ".gitignore",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 3`] = `
+Object {
+  "content": "image: node:10
+
+stages:
+  - test
+  - release
+
+test application:
+  stage: test
+  before_script:
+    - npm ci
+  script:
+    - npm test
+  coverage: /All files\\\\s*\\\\|\\\\s*([\\\\d\\\\.]+)/
+  except:
+    - tags
+
+release application:
+  stage: release
+  before_script:
+    - npm ci
+    - npm run build
+  script:
+    - npx semantic-release
+  only:
+    - master
+",
+  "name": ".gitlab-ci.yml",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 4`] = `
+Object {
+  "content": "# name
+
+This is a typescript project.
+
+description
+",
+  "name": "README.md",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 5`] = `
+Object {
+  "content": "{
+    \\"compilerOptions\\": {
+        \\"target\\": \\"es2018\\",
+        \\"module\\": \\"commonjs\\",
+        \\"moduleResolution\\": \\"node\\",
+        \\"removeComments\\": true,
+        \\"outDir\\": \\"../build\\",
+        \\"rootDir\\": \\"../src\\",
+        \\"declaration\\": false,
+        \\"sourceMap\\": false,
+        \\"importHelpers\\": true,
+        \\"strict\\": true,
+        \\"noUnusedLocals\\": true,
+        \\"noUnusedParameters\\": true,
+        \\"lib\\": [
+            \\"es2018\\"
+        ]
+    },
+    \\"include\\": [
+        \\"../src/**/*\\"
+    ],
+    \\"exclude\\": []
+}
+",
+  "name": "config/tsconfig.base.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 6`] = `
+Object {
+  "content": "{
+    \\"extends\\": \\"./tsconfig.base.json\\",
+    \\"compilerOptions\\": {
+        \\"outDir\\": \\"../build\\"
+    }
+}
+",
+  "name": "config/tsconfig.build.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 7`] = `
+Object {
+  "content": "{
+  \\"preset\\": \\"ts-jest\\",
+  \\"testEnvironment\\": \\"node\\",
+  \\"testMatch\\": [\\"<rootDir>/test/**/*.spec.ts\\"]
+}
+",
+  "name": "jest.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 8`] = `
+Object {
+  "content": "{
+  \\"name\\": \\"name\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"build/app.js\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli ./build ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json --coverage\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/USER/REPO.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/USER/REPO/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\">=10\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"gitUser <gitEmail>\\",
+  \\"license\\": \\"UNLICENCE\\"
+}
+",
+  "name": "package.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 9`] = `
+Object {
+  "content": "export function helloThere(): string {
+  return 'hello typescript!';
+}
+",
+  "name": "src/app.ts",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 10`] = `
+Object {
+  "content": "import { helloThere } from '../src/app';
+
+describe('Testing', () => {
+
+  it('is important!', () => {
+    expect(helloThere()).toBe('hello typescript!');
+  });
+
+});
+",
+  "name": "test/app.spec.ts",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 11`] = `
+Object {
+  "content": "{
+    \\"extends\\": \\"./config/tsconfig.base.json\\",
+    \\"compilerOptions\\": {
+        \\"watch\\": true,
+        \\"sourceMap\\": true
+    }
+}
+",
+  "name": "tsconfig.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 12`] = `
+Object {
+  "content": "{
+    \\"extends\\": \\"@smartive/tslint-config\\"
+}
+",
+  "name": "tslint.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 1`] = `
+Object {
+  "content": "root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 125
+
+[*.md]
+trim_trailing_whitespace = false
+",
+  "name": ".editorconfig",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 2`] = `
+Object {
+  "content": "# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build
+coverage
+",
+  "name": ".gitignore",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 3`] = `
+Object {
+  "content": "image: node:10
+
+stages:
+  - test
+  - release
+
+test library:
+  stage: test
+  before_script:
+    - npm ci
+  script:
+    - npm test
+  coverage: /All files\\\\s*\\\\|\\\\s*([\\\\d\\\\.]+)/
+  except:
+    - tags
+
+release library:
+  stage: release
+  before_script:
+    - npm ci
+    - npm run build
+  script:
+    - npx semantic-release
+  only:
+    - master
+",
+  "name": ".gitlab-ci.yml",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 4`] = `
+Object {
+  "content": "# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Typescript stuff
+build/
+coverage/
+config/
+tsconfig.json
+tslint.json
+
+# Typescript files (but not the definitions)
+src/
+*.ts
+!*.d.ts
+
+# Testfiles
+jest.json
+test/
+
+# CI Configs
+.gitlab-ci.yml
+",
+  "name": ".npmignore",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 5`] = `
+Object {
+  "content": "# name
+
+This is a typescript project.
+
+description
+",
+  "name": "README.md",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 6`] = `
+Object {
+  "content": "{
+    \\"compilerOptions\\": {
+        \\"target\\": \\"es2018\\",
+        \\"module\\": \\"commonjs\\",
+        \\"moduleResolution\\": \\"node\\",
+        \\"removeComments\\": false,
+        \\"outDir\\": \\"../build\\",
+        \\"rootDir\\": \\"../src\\",
+        \\"declaration\\": true,
+        \\"sourceMap\\": false,
+        \\"importHelpers\\": true,
+        \\"strict\\": true,
+        \\"noUnusedLocals\\": true,
+        \\"noUnusedParameters\\": true,
+        \\"lib\\": [
+            \\"es2018\\"
+        ]
+    },
+    \\"include\\": [
+        \\"../src/**/*\\"
+    ],
+    \\"exclude\\": []
+}
+",
+  "name": "config/tsconfig.base.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 7`] = `
+Object {
+  "content": "{
+    \\"extends\\": \\"./tsconfig.base.json\\",
+    \\"compilerOptions\\": {
+        \\"outDir\\": \\"../\\"
+    }
+}
+",
+  "name": "config/tsconfig.build.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 8`] = `
+Object {
+  "content": "{
+  \\"preset\\": \\"ts-jest\\",
+  \\"testEnvironment\\": \\"node\\",
+  \\"testMatch\\": [\\"<rootDir>/test/**/*.spec.ts\\"]
+}
+",
+  "name": "jest.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 9`] = `
+Object {
+  "content": "{
+  \\"name\\": \\"name\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"index.js\\",
+  \\"typings\\": \\"index.d.ts\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli **/*.js **/*.d.ts !src/**/* !test/**/* !config/**/* !node_modules/**/* ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json --coverage\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/USER/REPO.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/USER/REPO/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\">=10\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"gitUser <gitEmail>\\",
+  \\"license\\": \\"UNLICENCE\\"
+}
+",
+  "name": "package.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 10`] = `
+Object {
+  "content": "export function helloThere(): string {
+  return 'hello typescript!';
+}
+",
+  "name": "src/index.ts",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 11`] = `
+Object {
+  "content": "import { helloThere } from '../src';
+
+describe('Testing', () => {
+
+  it('is important!', () => {
+    expect(helloThere()).toBe('hello typescript!');
+  });
+
+});
+",
+  "name": "test/index.spec.ts",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 12`] = `
+Object {
+  "content": "{
+    \\"extends\\": \\"./config/tsconfig.base.json\\",
+    \\"compilerOptions\\": {
+        \\"watch\\": true,
+        \\"sourceMap\\": true
+    }
+}
+",
+  "name": "tsconfig.json",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 13`] = `
+Object {
+  "content": "{
+    \\"extends\\": \\"@smartive/tslint-config\\"
+}
+",
+  "name": "tslint.json",
+}
+`;

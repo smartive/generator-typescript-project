@@ -1,7 +1,5 @@
 {
   "preset": "ts-jest",
   "testEnvironment": "node",
-  "testMatch": [
-    "**/test/**/*.spec.ts"
-  ]
+  "testMatch": ["<rootDir>/test/**/*.spec.ts"]
 }

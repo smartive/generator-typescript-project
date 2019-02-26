@@ -7,9 +7,8 @@
     "clean": "del-cli ./app/*.js ./app/*.js.map ./coverage",
     "build": "npm run clean && tsc -p ./config/tsconfig.build.json",
     "develop": "npm run clean && tsc -p .",
-    "test": "npm run clean && jest -c ./jest.json",
-    "test:watch": "npm run clean && jest -c ./jest.json --watch",
-    "semantic-release": "semantic-release"
+    "test": "npm run clean && jest -c ./jest.json --coverage",
+    "test:watch": "npm run clean && jest -c ./jest.json --watch"
   },
   "repository": {
     "type": "git",
@@ -43,13 +42,17 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.5",
+    "@types/jest": "^24.0.9",
     "@types/lodash": "^4.14.121",
     "@types/node": "^11.9.5",
+    "@types/yeoman-assert": "^3.1.1",
     "@types/yeoman-generator": "^3.1.0",
+    "@types/yeoman-test": "^2.0.1",
     "@types/yosay": "0.0.29",
     "del-cli": "^1.1.0",
     "jest": "^24.1.0",
     "semantic-release": "^15.13.3",
+    "ts-jest": "^24.0.0",
     "typescript": "^3.3.3333",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.9.1"
