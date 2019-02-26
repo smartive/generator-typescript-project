@@ -21,14 +21,5 @@ tslint.json
 jest.json
 test/
 
-<% if(provideGitlab || provideTravis || provideAppveyor) { %>
 # CI Configs
-<% if(provideGitlab) { %>.gitlab-ci.yml<% } %>
-<% if(provideTravis) { %>.travis.yml<% } %>
-<% if(provideAppveyor) { %>.appveyor.yml<% } %>
-<% } %>
-
-<% if(withTypedoc) { %>
-# Documentation
-docs/
-<% } %>
+.gitlab-ci.yml

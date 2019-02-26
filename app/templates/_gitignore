@@ -9,8 +9,3 @@ node_modules
 # Typescript stuff
 build
 coverage
-
-<% if(withTypedoc) { %>
-# Documentation
-docs/
-<% } %>

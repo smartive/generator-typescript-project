@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es2018",
         "module": "commonjs",
         "moduleResolution": "node",
         "removeComments": <% if(type === 'library') { %>false<% } else { %>true<% } %>,
@@ -13,8 +13,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "lib": [
-            "es2015"<% if(withTypedoc) {%>,
-            "dom"<% } %>
+            "es2018"
         ]
     },
     "include": [

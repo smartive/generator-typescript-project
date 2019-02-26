@@ -33,16 +33,16 @@
   "author": "Christoph Bühler <christoph@smartive.ch> (https://smartive.ch)",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.3.2",
-    "lodash": "^4.17.5",
-    "yeoman-generator": "^2.0.3",
+    "chalk": "^2.4.2",
+    "lodash": "^4.17.11",
+    "yeoman-generator": "^3.2.0",
     "yosay": "^2.0.2"
   },
   "devDependencies": {
     "del-cli": "^1.1.0",
-    "jest": "^22.4.3",
-    "semantic-release": "^15.1.5",
+    "jest": "^24.1.0",
+    "semantic-release": "^15.13.3",
     "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^1.7.0"
+    "yeoman-test": "^1.9.1"
   }
 }

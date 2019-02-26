@@ -707,6 +707,40 @@ exports[`typescript project generator template files should add typedoc to packa
 "
 `;
 
+exports[`typescript project generator template files should add typedoc to package json 2`] = `
+"{
+  \\"name\\": \\"name\\",
+  \\"version\\": \\"0.0.0-development\\",
+  \\"description\\": \\"description\\",
+  \\"main\\": \\"build/app.js\\",
+  \\"scripts\\": {
+    \\"clean\\": \\"del-cli ./build ./coverage\\",
+    \\"build\\": \\"npm run clean && tsc -p ./config/tsconfig.build.json\\",
+    \\"develop\\": \\"npm run clean && tsc -p .\\",
+    \\"lint\\": \\"tslint -c ./tslint.json -p ./config/tsconfig.build.json\\",
+    \\"test\\": \\"npm run lint && npm run clean && jest -c ./jest.json\\",
+    \\"test:watch\\": \\"npm run clean && jest -c ./jest.json --watch\\",
+    \\"semantic-release\\": \\"semantic-release\\"
+  },
+  \\"keywords\\": [],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/USER/REPO.git\\"
+  },
+  \\"bugs\\": {
+    \\"url\\": \\"https://github.com/USER/REPO/issues\\"
+  },
+  \\"homepage\\": \\"https://github.com/USER/REPO#readme\\",
+  \\"engines\\": {
+    \\"node\\": \\">=10\\",
+    \\"npm\\": \\"*\\"
+  },
+  \\"author\\": \\"gitUser <gitEmail>\\",
+  \\"license\\": \\"UNLICENCE\\"
+}
+"
+`;
+
 exports[`typescript project generator template files should change main in package json file for application type 1`] = `
 "{
   \\"name\\": \\"name\\",
@@ -768,6 +802,33 @@ exports[`typescript project generator template files should remove comments and 
         \\"noUnusedParameters\\": true,
         \\"lib\\": [
             \\"es2015\\"
+        ]
+    },
+    \\"include\\": [
+        \\"../src/**/*\\"
+    ],
+    \\"exclude\\": []
+}
+"
+`;
+
+exports[`typescript project generator template files should remove comments and declarations in build config for application 2`] = `
+"{
+    \\"compilerOptions\\": {
+        \\"target\\": \\"es2018\\",
+        \\"module\\": \\"commonjs\\",
+        \\"moduleResolution\\": \\"node\\",
+        \\"removeComments\\": true,
+        \\"outDir\\": \\"../build\\",
+        \\"rootDir\\": \\"../src\\",
+        \\"declaration\\": false,
+        \\"sourceMap\\": false,
+        \\"importHelpers\\": true,
+        \\"strict\\": true,
+        \\"noUnusedLocals\\": true,
+        \\"noUnusedParameters\\": true,
+        \\"lib\\": [
+            \\"es2018\\"
         ]
     },
     \\"include\\": [
