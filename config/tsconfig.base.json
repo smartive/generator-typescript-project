@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "rootDir": "../app",
+    "declaration": false,
+    "sourceMap": false,
+    "importHelpers": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "lib": ["es2018"]
+  },
+  "include": ["../app/**/*"],
+  "exclude": ["../app/templates/**/*"]
+}
