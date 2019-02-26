@@ -1,3 +1,3 @@
 export function helloThere(): string {
-    return 'hello typescript!';
+  return 'hello typescript!';
 }

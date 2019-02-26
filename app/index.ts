@@ -1,213 +1,135 @@
-// const { cyan, green, yellow } = require('chalk');
-// const { replace, startCase } = require('lodash');
-// const { join } = require('path');
-// const Generator = require('yeoman-generator');
-// const yosay = require('yosay');
+import chalk from 'chalk';
+import Generator = require('yeoman-generator');
+import yosay = require('yosay');
 
-// class GeneratorOptions {
-//   constructor(options) {
-//     this.name = options.name;
-//     this.namePascal = replace(startCase(this.name), / /g, '');
-//     this.folderName = this.name
-//       .split('/')
-//       .map(s => s.replace(/@/g, ''))
-//       .join('_');
-//     this.createPackageFolder =
-//       process
-//         .cwd()
-//         .split(/\\|\//)
-//         .pop() !== this.folderName;
-//     this.scopedPackage = this.name.indexOf('@') >= 0;
+import { GeneratorOptions } from './options';
+import { Answers } from './prompting';
+import { join } from 'path';
 
-//     this.description = options.description || 'NO DESCRIPTION PROVIDED';
+class TypescriptProjectGenerator extends Generator {
+  private generatorOptions!: GeneratorOptions;
 
-//     this.type = options.type;
+  public initializing(): void {
+    this.log(yosay(`Welcome to the ${chalk.green('typescript project')} generator, I'll compose a new project for you.`));
+  }
 
-//     this.withTypedoc = options.withTypedoc;
+  public async prompting(): Promise<Answers> {
+    const answers = (await this.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'The projects name?',
+        default: process
+          .cwd()
+          .split(/\\|\//)
+          .pop(),
+        validate: input => (!!!input ? 'Please enter a value' : true),
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: 'The projects description?',
+      },
+      {
+        type: 'list',
+        name: 'type',
+        message: 'The projects type?',
+        choices: ['library', 'application'],
+      },
+    ])) as Answers;
+    answers.gitUser = this.user.git.name();
+    answers.gitEmail = this.user.git.email();
 
-//     this.initializeGitRepo = options.initializeGitRepo;
-//     this.gitUser = options.gitUser;
-//     this.gitEmail = options.gitEmail;
-//     this.gitUrl = this.formatUrl(options.gitUrl || 'github.com/USER/REPO');
+    this.generatorOptions = new GeneratorOptions(answers);
 
-//     this.ciconfigs = options.ciconfigs;
-//   }
+    return answers;
+  }
 
-//   formatUrl(value) {
-//     if (value.indexOf('http://') >= 0 || value.indexOf('https://') >= 0) {
-//       return value;
-//     }
-//     return `https://${value}`;
-//   }
+  public configuring(): void {
+    this.log(`Configuring your module ${chalk.green(this.generatorOptions.name)}.`);
+    this.sourceRoot(join(__dirname, 'templates'));
 
-//   get provideGitlab() {
-//     return this.ciconfigs.indexOf('GitLab') >= 0;
-//   }
+    if (this.generatorOptions.createPackageFolder) {
+      this.destinationRoot(join(this.destinationRoot(), this.generatorOptions.folderName));
+    }
+  }
 
-//   get provideTravis() {
-//     return this.ciconfigs.indexOf('Travis') >= 0;
-//   }
+  public writing(): void {
+    this.log(`Writing template files.`);
 
-//   get provideAppveyor() {
-//     return this.ciconfigs.indexOf('Appveyor') >= 0;
-//   }
-// }
+    const files = [
+      'config/tsconfig.base.json',
+      'config/tsconfig.build.json',
+      '_editorconfig',
+      '_gitignore',
+      '_gitlab-ci.yml',
+      'jest.json',
+      'package.json',
+      'README.md',
+      'tsconfig.json',
+      'tslint.json',
+    ];
 
-// class TypescriptProjectGenerator extends Generator {
-//   initializing() {
-//     this.log(yosay(`Welcome to the ${green('typescript project')} generator, I'll compose a new project for you.`));
-//   }
+    if (this.generatorOptions.type === 'library') {
+      files.push('_npmignore');
+    }
 
-//   async prompting() {
-//     const answers = await this.prompt([
-//       {
-//         type: 'input',
-//         name: 'name',
-//         message: 'The projects name',
-//         default: process
-//           .cwd()
-//           .split(/\\|\//)
-//           .pop(),
-//       },
-//       {
-//         type: 'input',
-//         name: 'description',
-//         message: 'The projects description',
-//       },
-//       {
-//         type: 'list',
-//         name: 'type',
-//         message: 'The projects type',
-//         choices: ['library', 'application'],
-//       },
-//     ]);
+    for (const file of files) {
+      const destination = file.replace(/^_/, '.');
+      this.fs.copyTpl(this.templatePath(file), this.destinationPath(destination), this.generatorOptions);
+    }
 
-//     answers.gitUser = this.user.git.name();
-//     answers.gitEmail = this.user.git.email();
-//     this.options = new GeneratorOptions(answers);
-//     return answers;
-//   }
+    if (this.generatorOptions.type === 'library') {
+      this.fs.copyTpl(this.templatePath('src/index.ts'), this.destinationPath('src/index.ts'), this.generatorOptions);
+      this.fs.copyTpl(
+        this.templatePath('test/index.spec.ts'),
+        this.destinationPath('test/index.spec.ts'),
+        this.generatorOptions
+      );
+    } else {
+      this.fs.copyTpl(this.templatePath('src/index.ts'), this.destinationPath('src/app.ts'), this.generatorOptions);
+      this.fs.copyTpl(
+        this.templatePath('test/index.spec.ts'),
+        this.destinationPath('test/app.spec.ts'),
+        this.generatorOptions
+      );
+    }
+  }
 
-//   configuring() {
-//     this.log(`Configuring your module ${green(this.options.name)}.`);
-//     this.sourceRoot(join(__dirname, 'templates'));
+  public install(): void {
+    this.log('Installing dependencies.');
 
-//     if (this.options.createPackageFolder) {
-//       this.destinationRoot(join(this.destinationRoot(), this.options.folderName));
-//     }
-//   }
+    const devDeps = [
+      '@smartive/tslint-config',
+      '@types/jest',
+      'del-cli',
+      'jest',
+      'semantic-release',
+      'ts-jest',
+      'tslint',
+      'tsutils',
+      'typescript',
+    ];
 
-//   writing() {
-//     this.log(`Writing template files.`);
+    this.spawnCommandSync('npm', ['i', '-S', 'tslib']);
+    this.spawnCommandSync('npm', ['i', '-D', ...devDeps]);
 
-//     // Base files.
-//     this._writeTemplate('_gitignore', '.gitignore');
-//     this._writeTemplate('_npmignore', '.npmignore');
-//     this._copyFile('_editorconfig', '.editorconfig');
-//     this._copyFile('_jest.json', 'jest.json');
-//     this._writeTemplate('_package.json', 'package.json');
-//     this._writeTemplate('README.md');
-//     this._copyFile('tsconfig.json');
-//     this._copyFile('tslint.json');
-//     this._writeTemplate('config/tsconfig.base.json');
-//     this._writeTemplate('config/tsconfig.build.json');
+    if (this.generatorOptions.initializeGitRepo) {
+      this.log('Initializing the git repo.');
+      this.spawnCommandSync('git', ['init']);
 
-//     if (this.options.type === 'library') {
-//       this._copyFile('_npmrc', '.npmrc');
-//     }
+      this.log('Commiting the base files.');
+      this.spawnCommandSync('git', ['add', '.']);
+      this.spawnCommandSync('git', ['commit', '-am', '"chore: Initial commit."']);
+    }
+  }
 
-//     if (this.options.provideGitlab) {
-//       this._writeTemplate('_gitlab-ci.yml', '.gitlab-ci.yml');
-//     }
+  public end(): void {
+    this.log(`${chalk.green('All done!')}`);
+    this.log(`To start coding, run ${chalk.cyan('npm run develop')}`);
+    this.log(`To run the tests, run ${chalk.cyan('npm test')}`);
+    this.log(`To run the tests in a development (watching) mode, run ${chalk.cyan('npm test:watch')}`);
+  }
+}
 
-//     if (this.options.provideAppveyor) {
-//       this._writeTemplate('_appveyor.yml', '.appveyor.yml');
-//     }
-
-//     if (this.options.provideTravis) {
-//       this._writeTemplate('_travis.yml', '.travis.yml');
-//     }
-
-//     if (this.options.type === 'library') {
-//       this._copyFile('src/index.ts');
-//       this._writeTemplate('test/index.spec.ts');
-//     } else {
-//       this._copyFile('src/index.ts', 'src/app.ts');
-//       this._writeTemplate('test/index.spec.ts', 'test/app.spec.ts');
-//     }
-//   }
-
-//   install() {
-//     this.log('Installing dependencies.');
-
-//     const devDeps = [
-//       '@smartive/tslint-config',
-//       '@types/jest',
-//       'del-cli',
-//       'jest',
-//       'semantic-release',
-//       'ts-jest',
-//       'tslint',
-//       'tsutils',
-//       'typescript',
-//     ];
-
-//     if (this.options.withTypedoc) {
-//       devDeps.push('typedoc');
-//     }
-
-//     this.spawnCommandSync('npm', ['i', '-S', 'tslib']);
-//     this.spawnCommandSync('npm', ['i', '-D', ...devDeps]);
-
-//     if (this.options.initializeGitRepo) {
-//       this.log('Initializing the git repo.');
-//       this.spawnCommandSync('git', ['init']);
-//       this.spawnCommandSync('git', ['remote', 'add', 'origin', this.options.gitUrl]);
-
-//       this.log('Commiting the base files.');
-//       this.spawnCommandSync('git', ['add', '.']);
-//       this.spawnCommandSync('git', ['commit', '-am', '"chore: Initial commit."']);
-//     }
-//   }
-
-//   end() {
-//     this.log(`${green('All done!')}`);
-//     this.log(`To start coding, run ${cyan('npm run develop')}`);
-//     this.log(`To run the tests, run ${cyan('npm test')}`);
-//     this.log(`To run the tests in a development (watching) mode, run ${cyan('npm test:watch')}`);
-//   }
-
-//   /**
-//    * Writes a template file to a destination with the "options" object as data. If "to" is omitted, from is used.
-//    *
-//    * @param {string} from
-//    * @param {string} [to]
-//    *
-//    * @memberof GiuseppePluginGenerator
-//    */
-//   _writeTemplate(from, to) {
-//     if (!to) {
-//       to = from;
-//     }
-
-//     this.fs.copyTpl(this.templatePath(from), this.destinationPath(to), this.options);
-//   }
-
-//   /**
-//    * Copies a file from a to b. If "to" is omitted, from is used.
-//    *
-//    * @param {string} from
-//    * @param {string} [to]
-//    *
-//    * @memberof GiuseppePluginGenerator
-//    */
-//   _copyFile(from, to) {
-//     if (!to) {
-//       to = from;
-//     }
-
-//     this.fs.copy(this.templatePath(from), this.destinationPath(to));
-//   }
-// }
-
-// module.exports = TypescriptProjectGenerator;
+module.exports = TypescriptProjectGenerator;

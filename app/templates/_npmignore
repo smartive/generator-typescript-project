@@ -14,6 +14,7 @@ tsconfig.json
 tslint.json
 
 # Typescript files (but not the definitions)
+src/
 *.ts
 !*.d.ts
 

@@ -1,4 +1,4 @@
-image: node:9
+image: node:10
 
 stages:
   - test
@@ -7,7 +7,7 @@ stages:
 test <%= type %>:
   stage: test
   before_script:
-    - npm <% if (type === 'application') { %>ci<% } else { %>install<% } %>
+    - npm ci
   script:
     - npm test
   coverage: /All files\s*\|\s*([\d\.]+)/
@@ -17,9 +17,9 @@ test <%= type %>:
 release <%= type %>:
   stage: release
   before_script:
-    - npm <% if (type === 'application') { %>ci<% } else { %>install<% } %>
+    - npm ci
     - npm run build
   script:
-    - npm run semantic-release
+    - npx semantic-release
   only:
     - master

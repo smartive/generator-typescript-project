@@ -4,7 +4,7 @@
   "description": "Yeoman generator for typescript projects at smartive.",
   "main": "app/index.js",
   "scripts": {
-    "clean": "del-cli ./app/*.js ./coverage",
+    "clean": "del-cli ./app/*.js ./app/*.js.map ./coverage",
     "build": "npm run clean && tsc -p ./config/tsconfig.build.json",
     "develop": "npm run clean && tsc -p .",
     "test": "npm run clean && jest -c ./jest.json",
@@ -36,11 +36,13 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
+    "fs-extra": "^7.0.1",
     "lodash": "^4.17.11",
     "yeoman-generator": "^3.2.0",
     "yosay": "^2.0.2"
   },
   "devDependencies": {
+    "@types/fs-extra": "^5.0.5",
     "@types/lodash": "^4.14.121",
     "@types/node": "^11.9.5",
     "@types/yeoman-generator": "^3.1.0",
