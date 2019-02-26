@@ -2,9 +2,8 @@
 
 This is a yeoman generator for typescript projects.
 
-[![Build Status](https://travis-ci.org/smartive/generator-typescript-project.svg)](https://travis-ci.org/smartive/generator-typescript-project)
-[![Build Status](https://ci.appveyor.com/api/projects/status/4idlg38td9mujrt8?svg=true)](https://ci.appveyor.com/project/smartive-ci/generator-typescript-project)
-[![Code Coverage](https://codecov.io/gh/smartive/generator-typescript-project/branch/develop/graph/badge.svg)](https://codecov.io/gh/smartive/generator-typescript-project)
+[![pipeline status](https://gitlab.com/smartive/open-source/generator-typescript-project/badges/master/pipeline.svg)](https://gitlab.com/smartive/open-source/generator-typescript-project/commits/master)
+[![coverage report](https://gitlab.com/smartive/open-source/generator-typescript-project/badges/master/coverage.svg)](https://gitlab.com/smartive/open-source/generator-typescript-project/commits/master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Greenkeeper badge](https://badges.greenkeeper.io/smartive/generator-typescript-project.svg)](https://greenkeeper.io/)
 [![npm](https://img.shields.io/npm/v/@smartive/generator-typescript-project.svg?maxAge=3600)](https://www.npmjs.com/package/@smartive/generator-typescript-project)
