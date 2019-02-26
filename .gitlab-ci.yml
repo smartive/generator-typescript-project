@@ -1,0 +1,25 @@
+image: node:10
+
+stages:
+  - test
+  - release
+
+test generator:
+  stage: test
+  before_script:
+    - npm ci
+  script:
+    - npm test
+  coverage: /All files\s*\|\s*([\d\.]+)/
+  except:
+    - tags
+
+release generator:
+  stage: release
+  before_script:
+    - npm ci
+    - npm run build
+  script:
+    - npx semantic-release
+  only:
+    - master
