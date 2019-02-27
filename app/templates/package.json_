@@ -26,7 +26,7 @@
     "npm": "*"
   },
   "author": "<%= gitUser %> <<%= gitEmail %>>",
-  "license": "UNLICENCE"<% if(scopedPackage) {%>,
+  "license": "Unlicense"<% if(scopedPackage) {%>,
   "publishConfig": {
     "access": "public"
   }<% } %>
