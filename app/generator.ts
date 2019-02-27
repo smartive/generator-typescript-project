@@ -66,6 +66,7 @@ export class TypescriptProjectGenerator extends Generator {
       'jest.json',
       'package.json_',
       'README.md',
+      'LICENSE',
       'tsconfig.json',
       'tslint.json',
     ];

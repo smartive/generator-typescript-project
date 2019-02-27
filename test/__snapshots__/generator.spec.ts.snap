@@ -49,7 +49,7 @@ exports[`Typescript Project Generator Template Files should add access config to
     \\"npm\\": \\"*\\"
   },
   \\"author\\": \\"gitUser <gitEmail>\\",
-  \\"license\\": \\"UNLICENCE\\",
+  \\"license\\": \\"Unlicense\\",
   \\"publishConfig\\": {
     \\"access\\": \\"public\\"
   }
@@ -129,6 +129,37 @@ release application:
 
 exports[`Typescript Project Generator Template Files should generate the correct application files 4`] = `
 Object {
+  "content": "This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell,
+or distribute this software, either in source code form
+or as a compiled binary, for any purpose, commercial or non-commercial,
+and by any means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the software
+to the public domain. We make this dedication for the benefit of the
+public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to
+this software under copyright law.
+
+THE SOFTWARE IS PROVIDED \\"AS IS\\", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <http://unlicense.org/>
+",
+  "name": "LICENSE",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct application files 5`] = `
+Object {
   "content": "# name
 
 This is a typescript project.
@@ -139,7 +170,7 @@ description
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct application files 5`] = `
+exports[`Typescript Project Generator Template Files should generate the correct application files 6`] = `
 Object {
   "content": "{
     \\"compilerOptions\\": {
@@ -169,7 +200,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct application files 6`] = `
+exports[`Typescript Project Generator Template Files should generate the correct application files 7`] = `
 Object {
   "content": "{
     \\"extends\\": \\"./tsconfig.base.json\\",
@@ -182,7 +213,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct application files 7`] = `
+exports[`Typescript Project Generator Template Files should generate the correct application files 8`] = `
 Object {
   "content": "{
   \\"preset\\": \\"ts-jest\\",
@@ -194,7 +225,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct application files 8`] = `
+exports[`Typescript Project Generator Template Files should generate the correct application files 9`] = `
 Object {
   "content": "{
   \\"name\\": \\"name\\",
@@ -223,14 +254,14 @@ Object {
     \\"npm\\": \\"*\\"
   },
   \\"author\\": \\"gitUser <gitEmail>\\",
-  \\"license\\": \\"UNLICENCE\\"
+  \\"license\\": \\"Unlicense\\"
 }
 ",
   "name": "package.json",
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct application files 9`] = `
+exports[`Typescript Project Generator Template Files should generate the correct application files 10`] = `
 Object {
   "content": "export function helloThere(): string {
   return 'hello typescript!';
@@ -240,7 +271,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct application files 10`] = `
+exports[`Typescript Project Generator Template Files should generate the correct application files 11`] = `
 Object {
   "content": "import { helloThere } from '../src/app';
 
@@ -256,7 +287,7 @@ describe('Testing', () => {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct application files 11`] = `
+exports[`Typescript Project Generator Template Files should generate the correct application files 12`] = `
 Object {
   "content": "{
     \\"extends\\": \\"./config/tsconfig.base.json\\",
@@ -270,7 +301,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct application files 12`] = `
+exports[`Typescript Project Generator Template Files should generate the correct application files 13`] = `
 Object {
   "content": "{
     \\"extends\\": \\"@smartive/tslint-config\\"
@@ -385,6 +416,37 @@ test/
 
 exports[`Typescript Project Generator Template Files should generate the correct library files 5`] = `
 Object {
+  "content": "This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell,
+or distribute this software, either in source code form
+or as a compiled binary, for any purpose, commercial or non-commercial,
+and by any means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the software
+to the public domain. We make this dedication for the benefit of the
+public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to
+this software under copyright law.
+
+THE SOFTWARE IS PROVIDED \\"AS IS\\", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <http://unlicense.org/>
+",
+  "name": "LICENSE",
+}
+`;
+
+exports[`Typescript Project Generator Template Files should generate the correct library files 6`] = `
+Object {
   "content": "# name
 
 This is a typescript project.
@@ -395,7 +457,7 @@ description
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct library files 6`] = `
+exports[`Typescript Project Generator Template Files should generate the correct library files 7`] = `
 Object {
   "content": "{
     \\"compilerOptions\\": {
@@ -425,7 +487,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct library files 7`] = `
+exports[`Typescript Project Generator Template Files should generate the correct library files 8`] = `
 Object {
   "content": "{
     \\"extends\\": \\"./tsconfig.base.json\\",
@@ -438,7 +500,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct library files 8`] = `
+exports[`Typescript Project Generator Template Files should generate the correct library files 9`] = `
 Object {
   "content": "{
   \\"preset\\": \\"ts-jest\\",
@@ -450,7 +512,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct library files 9`] = `
+exports[`Typescript Project Generator Template Files should generate the correct library files 10`] = `
 Object {
   "content": "{
   \\"name\\": \\"name\\",
@@ -480,14 +542,14 @@ Object {
     \\"npm\\": \\"*\\"
   },
   \\"author\\": \\"gitUser <gitEmail>\\",
-  \\"license\\": \\"UNLICENCE\\"
+  \\"license\\": \\"Unlicense\\"
 }
 ",
   "name": "package.json",
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct library files 10`] = `
+exports[`Typescript Project Generator Template Files should generate the correct library files 11`] = `
 Object {
   "content": "export function helloThere(): string {
   return 'hello typescript!';
@@ -497,7 +559,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct library files 11`] = `
+exports[`Typescript Project Generator Template Files should generate the correct library files 12`] = `
 Object {
   "content": "import { helloThere } from '../src';
 
@@ -513,7 +575,7 @@ describe('Testing', () => {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct library files 12`] = `
+exports[`Typescript Project Generator Template Files should generate the correct library files 13`] = `
 Object {
   "content": "{
     \\"extends\\": \\"./config/tsconfig.base.json\\",
@@ -527,7 +589,7 @@ Object {
 }
 `;
 
-exports[`Typescript Project Generator Template Files should generate the correct library files 13`] = `
+exports[`Typescript Project Generator Template Files should generate the correct library files 14`] = `
 Object {
   "content": "{
     \\"extends\\": \\"@smartive/tslint-config\\"
